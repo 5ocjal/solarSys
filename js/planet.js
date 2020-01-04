@@ -1,11 +1,13 @@
 class Planet {
-    constructor(planetSize, distanceFromSun, parent, texture, emission) {
+    constructor(planetSize, orbitSpeed, distanceFromSun, parent, color, emission, hasRings) {
         this.planetSize = planetSize;
+        this.orbitSpeed = orbitSpeed;
         this.distanceFromSun = distanceFromSun;
         this.orbitLenght = distanceFromSun * 2 * PI;
         this.angle = random(2 * PI);
-        this.texture = texture;
+        this.color = color;
         this.emission = emission;
+        this.hasRings = hasRings;
         this.children = [];
         this.parent = parent;
 
@@ -14,14 +16,14 @@ class Planet {
         }
     }
 
-    update() {
+    orbitMove() {
         if (this.orbitLenght > 0) {
-            let speed = pow((width - this.distanceFromSun) / width, 0.5);
-            this.angle += (speed / this.orbitLenght) * (2 * PI);
+            this.angle += this.orbitSpeed;
         }
         for (let planet of this.children) {
-            planet.update();
+            planet.orbitMove();
         }
+
     }
 
     draw() {
@@ -50,10 +52,10 @@ class Planet {
                 ambientLight(this.emission);
             }
             ambientMaterial(255);
-            texture(this.texture);
+            fill(this.color);
             sphere(this.planetSize);
-            for (let body of this.children) {
-                body.draw();
+            for (let planet of this.children) {
+                planet.draw();
             }
         }
         pop();

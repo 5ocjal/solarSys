@@ -14,27 +14,41 @@ function setup() {
     let sunSize = 50;
     let zoomJupiter = 2
     let zoomOther = zoomJupiter * 2;
+    let colors = {
+        sun: color(250, 205, 30),
+        mercury: color(89, 49, 27),
+        venus: color(214, 171, 148),
+        earth: color(124, 160, 217),
+        mars: color(148, 45, 35),
+        jupiter: color(245, 216, 181),
+        saturn: color(173, 130, 78),
+        uranus: color(124, 214, 217),
+        neptune: color(11, 95, 227),
+
+        moons: color(169, 174, 184),
+    };
 
     createCanvas(windowWidth, windowHeight - 4, WEBGL);
 
 
-    sun = new Planet(24, 0, null, loadImage('planets/sun1.jpg'), sunLight);
+    sun = new Planet(sunSize, 0, 0, null, colors.sun, sunLight);
 
+    
     // PLANETS
-    mercury = new Planet(1.149, (sunSize + 38.7), sun, loadImage('planets/mercury.jpg'));
-    venus = new Planet(2.847, (sunSize + 72.3), sun, loadImage('planets/venus.jpg'));
-    earth = new Planet(10, (sunSize + 100), sun, loadImage('planets/earth.jpg'));
-    mars = new Planet(1.596, (sunSize + 152), sun, loadImage('planets/mars.jpg'));
-    jupiter = new Planet(33.63, (sunSize + 520/zoomJupiter), sun, loadImage('planets/jupiter.jpg'));
-    saturn = new Planet(28.35, (sunSize + 958/zoomJupiter), sun, loadImage('planets/saturn.jpg'));
-    uranus = new Planet(12.03, (sunSize + 1920/zoomOther), sun, loadImage('planets/uranus.jpg'));
-    neptune = new Planet(11.64, (sunSize + 3005/zoomOther), sun, loadImage('planets/neptune.jpg')); 
+    mercury = new Planet(5, 0.04, (sunSize + 38.7), sun, colors.mercury);
+    venus = new Planet(11, 0.032, (sunSize + 72.3), sun,  colors.venus);
+    earth = new Planet(12, 0.02, (sunSize + 92.2), sun, colors.earth);
+    mars = new Planet(9, 0.01, (sunSize + 152), sun, colors.mars);
+    jupiter = new Planet(23, 0.024, (sunSize + 520/zoomJupiter), sun, colors.jupiter);
+    saturn = new Planet(28.35, 0.023, (sunSize + 958/zoomJupiter), sun, colors.saturn);
+    uranus = new Planet(12.03, 0.017, (sunSize + 1920/zoomOther), sun, colors.uranus);
+    neptune = new Planet(11.64, 0.009, (sunSize + 3005/zoomOther), sun, colors.neptune); 
 
 
-    // MOONS
-    earthMoon =  new Planet(0.8172, 25, earth, loadImage('planets/moon.jpg'));
-    marsDeimos = new Planet(0.42, 30, mars, loadImage('planets/deimos.jpg'));
-    marsPhobos = new Planet(0.48, 22, mars, loadImage('planets/phobos.jpg'));
+    // // MOONS
+    earthMoon =  new Planet(3, 0.02, 25, earth, colors.moons);
+    marsDeimons = new Planet(2, 0.04, 24, mars, colors.moons);
+    marsPhobos = new Planet(1.5, 0.03, 28, mars, colors.moons);
 }
 
 function draw() {
@@ -45,7 +59,7 @@ function draw() {
     orbitControl();
     rotateX(PI / 2);
 
-    sun.update();
+    sun.orbitMove();
     sun.draw();
 }
 
