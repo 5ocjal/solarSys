@@ -1,5 +1,5 @@
 class Planet {
-    constructor(planetSize, orbitSpeed, distanceFromSun, parent, color, emission, hasRings) {
+    constructor(planetSize, orbitSpeed, distanceFromSun, parent, color, emission) {
         this.planetSize = planetSize;
         this.orbitSpeed = orbitSpeed;
         this.distanceFromSun = distanceFromSun;
@@ -7,7 +7,6 @@ class Planet {
         this.angle = random(2 * PI);
         this.color = color;
         this.emission = emission;
-        this.hasRings = hasRings;
         this.children = [];
         this.parent = parent;
 
@@ -23,7 +22,6 @@ class Planet {
         for (let planet of this.children) {
             planet.orbitMove();
         }
-
     }
 
     draw() {
@@ -31,9 +29,8 @@ class Planet {
         {
             push();
             {
-                let orbitColor = color(30);
                 strokeWeight(0.8);
-                stroke(orbitColor);
+                stroke(30);
                 noFill();
                 ellipse(0, 0, this.distanceFromSun * 2);
             }

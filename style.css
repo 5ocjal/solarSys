@@ -8,3 +8,16 @@ h5 {
   color: grey;
   text-align: center;
 }
+
+button {
+  color: #454443;
+  background: transparent;
+  border-radius: 5px;
+  width: 150px;
+  height: 30px;
+  border-color: #454443;
+}
+
+#controlMenu {
+  margin: 20px 0px 10px 20px;
+}
